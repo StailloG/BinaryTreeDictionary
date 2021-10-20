@@ -7,6 +7,10 @@ Java program that accepts and adds word(s) and its definition(s) into a Binary t
 
 ## Program Images
 
-If input not an integer for amount of words in dictionary, 
+If input not an integer for amount of words in dictionary:
 
 ![Screenshot (166)](https://user-images.githubusercontent.com/79016565/138023745-0b8e0857-82ef-490d-b021-7997570c2e98.png)
+
+Asks user to input words and its definition, displays Binary tree with connecting nodes, and displays words in alphabetical order:
+![Screenshot (167)](https://user-images.githubusercontent.com/79016565/138024101-de82a8bb-6905-4ebb-867e-b016d30cc4b4.png)
+
