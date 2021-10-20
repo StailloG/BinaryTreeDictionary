@@ -1,0 +1,20 @@
+/*
+ * creates and maintains a Binary Tree Search list of words and their meanings
+ * 
+ */
+package assignment_2;
+
+public class WordList {
+	
+	//variables
+	WordMeaning value; 
+	WordList left, right;
+	
+	
+	public WordList(WordMeaning value)
+	{ 
+		this.value = value; //initializing this class's value with WordMeaning's value
+		left = null; 
+		right = null; 
+	}
+}
