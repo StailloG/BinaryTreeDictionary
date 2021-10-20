@@ -1,0 +1,32 @@
+/*
+ * Holds the name & meaning of a word
+ * example:
+ * 		Cup - a container from which we drink
+ */
+
+package assignment_2;
+
+public class WordMeaning {
+
+	//variables
+	String word, meaning;
+	
+	/*
+	 * Initializing class variable with WordMeaning method "w" & "m"
+	 */
+	public WordMeaning(String w, String m)
+	{ 
+		word = w;
+		meaning = m;  
+	}
+	
+	String getWord() //returns word
+	{
+		return word;
+	}
+	
+	String getMeaning() //returns definition
+	{
+		return meaning;
+	}
+}
