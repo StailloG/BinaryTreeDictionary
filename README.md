@@ -7,3 +7,6 @@ Java program that accepts and adds word(s) and its definition(s) into a Binary t
 
 ## Program Images
 
+If input not an integer for amount of words in dictionary, 
+
+![Screenshot (166)](https://user-images.githubusercontent.com/79016565/138023745-0b8e0857-82ef-490d-b021-7997570c2e98.png)
