@@ -1,0 +1,161 @@
+/*
+ * creates the node of information and its link fiends
+ * example:
+ * 		link - word meaning object - link
+ */
+package assignment_2;
+
+public class WordMeaningNode {
+	
+	//variables
+	String sentence = " ";
+	boolean bool;
+       
+	/*
+	 * Calling WordList and WordMeaning classes to insert word(s) in Binary Tree
+	 */
+    public void insert(WordList node, WordMeaning value) 
+    {
+    	//left node
+		if (value.getWord().compareTo(node.value.getWord()) < 0) //if wordList word is less than word/definition
+		{ 
+			if (node.left != null)
+			{ 
+				insert(node.left, value); //recursion of insert() to insert left node and its value in WordList class
+			} 
+			else //if node null
+			{ 
+				sentence += node.value.getWord() + "  "; //String s now equals to WordMeaning value's getWord()
+				System.out.println(" Inserted [" + value.getWord() + "] to left of [" + node.value.getWord()  + "]");
+				node.left = new WordList(value); //left node now equals to value in WordList class
+			} 
+		} 
+		//right node
+		else if (value.getWord().compareTo(node.value.getWord())  > 0) //if wordList word is greater than word/definition
+		{
+			if (node.right != null) 
+			{
+				insert(node.right, value);
+			} 
+			else 
+			{
+				sentence += node.value.getWord() + "  "; 
+				System.out.println(" Inserted [" + value.getWord() + "] to right of [" + node.value.getWord() + "]");
+				node.right = new WordList(value);
+			}
+		}
+	}
+    
+     public void inOrder(WordList node) // Ascending, alphabetical order
+     {
+        if (node != null) 
+        {
+            inOrder(node.left);
+            System.out.print("\n " + node.value.getWord() + " - " + node.value.getMeaning()); //included definition here also
+            inOrder(node.right);
+        }
+     }
+     
+     public void inOrderWODefinition(WordList node)
+     {
+    	 if(node != null)
+    	 {
+    		 inOrder(node.left);
+    		 System.out.print("\n Deleted words" + node.value.getWord()); //to display deleted word(s) without definition
+    		 inOrder(node.right);
+    	 }
+     }
+     
+     /*
+      * returns true if String is in Binary Tree
+      */
+    public boolean contains(WordList node, String key)
+	{    	
+    	if(node == null) //if WordList Class == null
+    	{
+    		return false;
+    	}
+    	
+    	else if(node.value.getWord() == key) //else if in tree
+    	{
+    		return true;
+    	}
+    	else
+    		return contains(node.left, key) || contains(node.right, key);
+	}    
+     
+	/*
+	 * Deletes node
+	 */
+    public WordList deleteNode(WordList root, String key)
+	{
+		if(root == null) //if WordList tree empty
+		{
+			return root; //base case
+		}
+		
+		if(key.compareTo(root.value.getWord()) < 0) //if key > getWord()
+		{
+			root.left = deleteNode(root.left, key); //recursion
+		}
+		else if(key.compareTo(root.value.getWord()) > 0) //right
+		{
+			root.right = deleteNode(root.right, key); //recursion
+		}
+		else
+		{
+			//if node not left or right
+			if(root.left == null && root.right == null)
+			{
+				root = null;
+			}
+			else if(root.right != null) //if right node
+			{
+				root = getMinimumKey(root);
+				root.right = deleteNode(root.right, key);
+			}
+			else
+			{
+				root = getMaximumKey(root);
+				root.left = deleteNode(root.left, key);
+			}
+		}
+		
+		
+		return root;
+	}
+    
+	//	You may need this helper function to find minimum value node in the subtree rooted at `curr`
+	public WordList getMinimumKey(WordList curr)
+	{
+		curr = curr.right;
+		if(curr == curr.right)
+		{
+			while (curr.left != null) 
+			{
+				curr = curr.left;
+			}
+		}
+		
+		return curr;
+	}
+	
+	public WordList getMaximumKey(WordList curr2)
+	{
+		curr2 = curr2.left;
+		if(curr2 == curr2.left)
+		{
+			while (curr2.right != null) 
+			{
+				curr2 = curr2.right;
+			}
+		}
+		
+		return curr2;
+	}
+
+	public String toString()
+	{
+		return sentence;
+	}
+}
