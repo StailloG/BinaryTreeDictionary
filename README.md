@@ -12,5 +12,13 @@ If input not an integer for amount of words in dictionary:
 ![Screenshot (166)](https://user-images.githubusercontent.com/79016565/138023745-0b8e0857-82ef-490d-b021-7997570c2e98.png)
 
 Asks user to input words and its definition, displays Binary tree with connecting nodes, and displays words in alphabetical order:
+
 ![Screenshot (167)](https://user-images.githubusercontent.com/79016565/138024101-de82a8bb-6905-4ebb-867e-b016d30cc4b4.png)
 
+Asks user which word to delete from dictionary. If word does not exist:
+
+![Screenshot (171)](https://user-images.githubusercontent.com/79016565/138024198-6f5da2d5-57a0-447c-8c98-d4c1c80f393e.png)
+
+If user does not want to delete a word from dictionary, program ends:
+
+![Screenshot (168)](https://user-images.githubusercontent.com/79016565/138024253-fbf4833e-5796-4527-8654-b6190a115bd3.png)
