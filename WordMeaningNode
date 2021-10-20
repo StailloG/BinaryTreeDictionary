@@ -16,7 +16,7 @@ public class WordMeaningNode {
 	 */
     public void insert(WordList node, WordMeaning value) 
     {
-    	//left node
+    		//left node
 		if (value.getWord().compareTo(node.value.getWord()) < 0) //if wordList word is less than word/definition
 		{ 
 			if (node.left != null)
