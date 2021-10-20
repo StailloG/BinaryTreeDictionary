@@ -1,0 +1,158 @@
+/*
+ * @author
+ * Stephanie Castillo
+ * 
+ * Java program that accepts words and their meanings & adds them into a Binary Tree.
+ * Displays the list of words in alphabetical order.
+ * Asks for user input to remove a word from the Binary Tree.
+ * If yes, displays the updated list of words, along with another list of the deleted word.
+ * Else, program ends
+ */
+package assignment_2;
+
+import java.util.Arrays;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class Dictionary {
+	public static void main(String[] args)
+	{
+		//scanner class
+		Scanner scan = new Scanner(System.in);
+		
+		//user input variables
+		String vocabWordsArray[] = new String[4];
+		String inputWord;
+		String definitionArray[] = new String[4];
+		String inputDefinition;
+		String wordAmount; //amount of words in dictionary
+		int intWordAmount;
+		String deleteWord;
+		String yesOrNoDelete; //user input if wants to delete a word from dictionary
+		
+		//ask user input for how many words in dictionary
+		do
+		{
+			System.out.println("How many words would you like to add to the dictionary? Please enter a number amount:");
+			wordAmount = scan.nextLine();
+			
+		}while(!isInt(wordAmount) || wordAmount.equals("0")); //re-ask for user input if not an int or 0
+		
+		//initialize variable to convert wordAmount from string to int
+		intWordAmount = Integer.parseInt(wordAmount);
+		
+		//create arrays based on user input 'wordAmount'
+		vocabWordsArray = new String[intWordAmount];
+		definitionArray = new String[intWordAmount];
+		
+		//ask user to input words and its definition
+		//for the amount of words in the dictionary
+		for(int i = 0; i < vocabWordsArray.length; i++)
+		{
+			//insert word into vocabWorsArray
+			System.out.println("Enter a word to input in Binary Tree:");
+			inputWord = scan.nextLine();
+			vocabWordsArray[i] = inputWord;
+			
+			//insert definition into definitionArray
+			System.out.println("Enter definition for [" + vocabWordsArray[i] + "]:");
+			inputDefinition = scan.nextLine();
+			definitionArray[i] = inputDefinition;
+		}
+		
+		
+		//Calling classes AFTER user input so that wordList class could add vocabWordsArray[0] & definitionArray
+		WordMeaningNode binaryTree = new WordMeaningNode();//calling Binary Tree class
+		WordList root = new WordList(new WordMeaning(vocabWordsArray[0], definitionArray[0])); //creates word with definition
+		
+		
+		//displays first word from the array
+		System.out.print("\nBuilding tree with root value [" + root.value.getWord());
+        System.out.println("] - ");
+        
+        //sets and displays root tree with word & definition
+        for (int i = 1; i < vocabWordsArray.length; i++)
+        {
+        	binaryTree.insert(root, new WordMeaning(vocabWordsArray[i], definitionArray[i]));
+        }
+        	
+		//output in alphabetical order
+		System.out.println("\nTraversing the tree in alphabetical order with definition");
+		binaryTree.inOrder(root);
+		System.out.println("\n");
+				
+		//ask user input if user would like to delete a word
+		System.out.println("Would you like to delete a word from the dictionary? Type 'y' or 'n':");
+		yesOrNoDelete = scan.nextLine();
+		
+		switch(yesOrNoDelete)
+		{
+		case "y":
+		case "Y":
+			
+			//ask user input which word to delete
+			System.out.println("Type which word you would like to delete:");
+			deleteWord = scan.nextLine();
+
+			//if dictionary contains user input
+			if(Arrays.asList(vocabWordsArray).contains(deleteWord))
+			{
+				//output updated dictionary
+				System.out.println("\nTraversing the updated tree in alphabetical order with definition");
+				root = binaryTree.deleteNode(root, deleteWord);
+				binaryTree.inOrder(root);
+				System.out.println("\n\nDeleted word:\n");
+				System.out.println(deleteWord);
+				System.out.println("\nGoodbye!");
+			}
+			else
+			{
+				//if word does not exist in dictionary
+				do
+				{
+					System.out.println("Word doesn't exist, please enter another word:\n");
+					deleteWord = scan.nextLine();
+					
+				}while(!Arrays.asList(vocabWordsArray).contains(deleteWord));
+				
+				//output updated dictionary
+				System.out.println("\nTraversing the updated tree in alphabetical order with definition");
+				root = binaryTree.deleteNode(root, deleteWord);
+				binaryTree.inOrder(root);
+				System.out.println("\n\nDeleted word:\n");
+				System.out.println(deleteWord);
+				System.out.println("\nGoodbye!");
+			}
+			break;
+		case "n":
+		case "N":
+			System.out.println("\nGoodbye!");
+			break;
+			default:
+				break;
+		}
+		
+		//close scanner
+		scan.close();
+	}
+	
+	 /*
+	 * Checks to see if wordAmount is an integer,
+	 * which is the correct user input for numbers in dictionary
+	 */
+	static boolean isInt(String wordAmount)
+	{
+	    try
+	    {
+	        Integer.parseInt(wordAmount);
+	    }
+	    catch(NumberFormatException ex)
+	    {
+	    	System.out.println("Incorrect input, please enter an integer.\n");
+	        return false;
+	    }
+	    
+	    return true;
+	}
+
+}
